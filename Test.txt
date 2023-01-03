@@ -1,0 +1,45 @@
+# def get_ap_aging_detail(company: str):
+#     cn = conn.qb_connection('QuickBooks Data')  # pyodbc.connect('DSN=QuickBooks Data',autocommit=True)
+#     cursor = cn.cursor()
+#
+#     cursor.execute("sp_report APAgingDetail show TxnType_Title, Date_Title, RefNumber_Title, Name_Title, "
+#                    "DueDate_Title, Aging_Title, OpenBalance_Title, Text, Blank, TxnType, Date, RefNumber, Name, "
+#                    "DueDate, Aging, OpenBalance parameters DateMacro = 'Today', AgingAsOf = 'Today'")
+#     columns = [column[0] for column in cursor.description]
+#
+#     data = []
+#     for row in cursor.fetchall():
+#         data.append(list(row))
+#
+#     cursor.close()
+#     cn.close()
+#
+#     df = pd.DataFrame(data, columns=columns)
+#
+#     df['CompanyName'] = company
+#     df.to_excel('ap_aging_detail.xlsx', sheet_name="QB_APAgingDetail", index=False)
+
+
+# def get_ar_aging_detail(company: str):
+#     cn = conn.qb_connection('QuickBooks Data')  # pyodbc.connect('DSN=QuickBooks Data',autocommit=True)
+#     cursor = cn.cursor()
+#
+#     cursor.execute("sp_report ARAgingDetail show TxnType_Title, Date_Title, RefNumber_Title, PONumber_Title, "
+#                    "Name_Title, Terms_Title, DueDate_Title, Aging_Title, OpenBalance_Title, Text, Blank, TxnType, "
+#                    "Date, RefNumber, PONumber, Name, Terms, DueDate, Aging, OpenBalance parameters DateMacro = "
+#                    "'Today', AgingAsOf = 'Today'")
+#     columns = ["TxnType_Title", "Date_Title", "RefNumber_Title", "PONumber_Title", "Name_Title", "Terms_Title",
+#                "DueDate_Title", "Aging_Title", "OpenBalance_Title", "Text", "Blank", "TxnType", "Date", "RefNumber",
+#                "PONumber", "Name", "Terms", "DueDate", "Aging", "OpenBalance"]
+#
+#     data = []
+#     for row in cursor.fetchall():
+#         data.append(list(row))
+#
+#     cursor.close()
+#     cn.close()
+#
+#     df = pd.DataFrame(data, columns=columns)
+#     df['Text'] = df['Text'].ffill(inplace=True)
+#     df['CompanyName'] = company
+#     df.to_excel('ar_aging_detail.xlsx', sheet_name="QB_ARAgingDetail", index=False)
